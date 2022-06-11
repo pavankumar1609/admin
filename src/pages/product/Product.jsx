@@ -10,6 +10,7 @@ export default function Product() {
   const location = useLocation();
   const productId = location.pathname.split("/")[2];
   const [pStats, setPStats] = useState([]);
+  const [items, setItems] = useState([]);
 
   const product = useSelector((state) =>
     state.product.products.find((product) => product._id === productId)
@@ -40,6 +41,7 @@ export default function Product() {
         const list = res.data.sort((a, b) => {
           return a._id - b._id;
         });
+        setItems(list);
         list.map((item) =>
           setPStats((prev) => [
             ...prev,
@@ -72,15 +74,17 @@ export default function Product() {
           </div>
           <div className="productInfoBottom">
             <div className="productInfoItem">
-              <span className="productInfoKey">id:</span>
+              <span className="productInfoKey">id: </span>
               <span className="productInfoValue">{product._id}</span>
             </div>
             <div className="productInfoItem">
-              <span className="productInfoKey">sales:</span>
-              <span className="productInfoValue">5123</span>
+              <span className="productInfoKey">sales: </span>
+              <span className="productInfoValue">
+                {items.map((item) => item.total)}
+              </span>
             </div>
             <div className="productInfoItem">
-              <span className="productInfoKey">in stock:</span>
+              <span className="productInfoKey">in stock: </span>
               <span className="productInfoValue">
                 {product.inStock ? "Yes" : "No"}
               </span>
