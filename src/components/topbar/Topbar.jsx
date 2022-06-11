@@ -29,7 +29,8 @@ export default function Topbar() {
             <Settings />
           </div>
           <img
-            src="https://images.pexels.com/photos/1526814/pexels-photo-1526814.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"
+            style={{ objectFit: "cover" }}
+            src="https://firebasestorage.googleapis.com/v0/b/shop-2b9e1.appspot.com/o/IMG_20190928_123335_2-01.jpg?alt=media&token=5b47c28f-9164-4698-b718-5c3ab970adbf"
             alt="admin user"
             className="topAvatar"
           />
