@@ -10,11 +10,15 @@ export default function WidgetLg() {
     const getOrders = async () => {
       try {
         const res = await userRequest.get("orders");
-        setOrders(res.data);
+        const newOrders = res.data.sort(
+          (b, a) => new Date(a.createdAt) - new Date(b.createdAt)
+        );
+        setOrders(newOrders);
       } catch {}
     };
     getOrders();
   }, []);
+
   const Button = ({ type }) => {
     return <button className={"widgetLgButton " + type}>{type}</button>;
   };
@@ -29,7 +33,7 @@ export default function WidgetLg() {
             <th className="widgetLgTh">Amount</th>
             <th className="widgetLgTh">Status</th>
           </tr>
-          {orders.map((order) => (
+          {orders.slice(0, 6).map((order) => (
             <tr className="widgetLgTr" key={order._id}>
               <td className="widgetLgUser">
                 <span className="widgetLgName">{order.userId}</span>
